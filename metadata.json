@@ -1,0 +1,6 @@
+{
+  "name": "AI Headshot Generator",
+  "description": "Upload a photo of yourself and generate multiple headshot variations in different styles using natural language.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
