@@ -4,7 +4,6 @@
 ![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Build](https://img.shields.io/github/actions/workflow/status/nsalvacao/ai_headshot_generator/ci.yml?branch=main&style=for-the-badge)
 
 **AI-assisted wardrobe and portrait generation, powered by Google Gemini 2.5 Flash Image and a strictly typed React 19 client.**
 
