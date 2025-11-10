@@ -8,9 +8,11 @@ import { GoogleGenAI, GenerateContentResponse, Modality } from "@google/genai";
 const dataUrlToParts = (dataUrl: string) => {
     const arr = dataUrl.split(',');
     if (arr.length < 2) throw new Error("Invalid data URL");
-    const mimeMatch = arr[0].match(/:(.*?);/);
-    if (!mimeMatch || !mimeMatch[1]) throw new Error("Could not parse MIME type from data URL");
-    return { mimeType: mimeMatch[1], data: arr[1] };
+    const mimeMatch = arr[0]?.match(/:(.*?);/);
+    if (!mimeMatch?.[1]) throw new Error("Could not parse MIME type from data URL");
+    const data = arr[1];
+    if (!data) throw new Error("Missing data in URL");
+    return { mimeType: mimeMatch[1], data };
 }
 
 const dataUrlToPart = (dataUrl: string) => {
@@ -50,9 +52,8 @@ export const generatePortrait = async (baseImageUrl: string, fullPrompt: string,
     if (!apiKey) {
         throw new Error("API Key is missing. Please set your API Key in the settings.");
     }
-    const ai = new GoogleGenAI({ apiKey });
-
     const baseImagePart = dataUrlToPart(baseImageUrl);
+    const ai = new GoogleGenAI({ apiKey });
     
     const response = await ai.models.generateContent({
         model,

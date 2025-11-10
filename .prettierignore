@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+
+# Environment files
+*.local
+
+# Personal context files
+AGENTS.md
+GEMINI.md
+Dev/
+
+# Lock files
+package-lock.json

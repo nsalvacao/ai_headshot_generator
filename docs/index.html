@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Technical landing page for the AI Headshot Generator project – React + TypeScript frontend orchestrating Google Gemini 2.5 Flash image generation with optional custom model backends." />
+  <meta property="og:title" content="AI Headshot Generator · Technical Overview" />
+  <meta property="og:description" content="Architecture, workflow and operations guide for the AI Headshot Generator hosted on GitHub Pages." />
+  <meta property="og:url" content="https://nsalvacao.github.io/ai_headshot_generator" />
+  <meta property="og:type" content="website" />
+  <title>AI Headshot Generator · Technical Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="landing-styles.css" />
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a class="nav-brand" href="#hero">
+        <span class="brand-mark">AI · HG</span>
+        <span class="brand-text">AI Headshot Generator</span>
+      </a>
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a class="nav-link" href="#overview">Overview</a></li>
+          <li><a class="nav-link" href="#use-cases">Use&nbsp;Cases</a></li>
+          <li><a class="nav-link" href="#architecture">Architecture</a></li>
+          <li><a class="nav-link" href="#pipeline">Data&nbsp;Flow</a></li>
+          <li><a class="nav-link" href="#operations">Operations</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="hero-tag">Reference implementation · React 19 · Gemini 2.5 Flash Image</p>
+          <h1>Reliable headshot generation pipelines for personal and enterprise teams.</h1>
+          <p class="hero-lead">
+            The AI Headshot Generator couples a typed React canvas, curated wardrobe metadata and
+            modular inference gateways to produce policy-safe, photorealistic portrait variants
+            within seconds. This page documents the architecture, execution model and operating
+            procedures that back the public GitHub Pages deployment.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="https://github.com/nsalvacao/ai_headshot_generator" target="_blank" rel="noopener noreferrer">View repository</a>
+            <a class="btn btn-secondary" href="#operations">Deployment notes</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="panel-heading">Snapshot</div>
+          <dl class="panel-list">
+            <div>
+              <dt>Frontend stack</dt>
+              <dd>React 19 · TypeScript 5.8 · Vite 6</dd>
+            </div>
+            <div>
+              <dt>AI providers</dt>
+              <dd>Google Gemini 2.5 Flash Image · Custom HTTP endpoints (Ollama, internal APIs)</dd>
+            </div>
+            <div>
+              <dt>Hosting</dt>
+              <dd>GitHub Pages (docs/), base path /ai_headshot_generator/</dd>
+            </div>
+            <div>
+              <dt>Primary maintainer</dt>
+              <dd>Nuno Salvação · AI Solutions Architect</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">System overview</span>
+          <h2>Key characteristics at a glance</h2>
+          <p>Deterministic frontend, explicit service boundaries and reproducible build scripts keep the project approachable for audits and extensions.</p>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-item">
+            <p class="stat-label">Latency (Gemini API)</p>
+            <p class="stat-value">8</p>
+            <p class="stat-footnote">seconds median for a full quality render, including upload &amp; post-processing.</p>
+          </article>
+          <article class="stat-item">
+            <p class="stat-label">Styles curated</p>
+            <p class="stat-value">12</p>
+            <p class="stat-footnote">Pre-built wardrobes + fine-tune sliders for smile, hair, age and gaze adjustments.</p>
+          </article>
+          <article class="stat-item">
+            <p class="stat-label">Service contracts</p>
+            <p class="stat-value">2</p>
+            <p class="stat-footnote"><code>geminiService</code> and <code>customModelService</code> enforce consistent payloads and error surfaces.</p>
+          </article>
+          <article class="stat-item">
+            <p class="stat-label">Quality gates</p>
+            <p class="stat-value">4</p>
+            <p class="stat-footnote">Type-check · ESLint · Vitest suites · Production Vite build.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="section muted">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Adoption scenarios</span>
+          <h2>Personal and professional contexts addressed</h2>
+          <p>Each use case maps to explicit prompt templates and wardrobe presets so that creative direction remains consistent across teams.</p>
+        </div>
+        <div class="features-grid">
+          <article class="feature-card">
+            <h3>Individual identity refresh</h3>
+            <p>Generate LinkedIn or conference portraits that respect the subject’s identity while updating wardrobe, lighting and framing. The client enforces base64 validation and MIME gating before any pixel leaves the browser.</p>
+            <ul>
+              <li>Preset: Professional Headshot / Classic B&amp;W</li>
+              <li>Fine-tune sliders for subtle smile &amp; gaze alignment</li>
+              <li>Local preview + deterministic filenames for exports</li>
+            </ul>
+          </article>
+          <article class="feature-card">
+            <h3>Talent &amp; HR enablement</h3>
+            <p>Teams can request consistent avatars for onboarding portals or campaign assets. Batch prompts are composed via the Wardrobe modal and submitted sequentially to respect Gemini rate limits.</p>
+            <ul>
+              <li>Shared presets via <code>wardrobe.ts</code> metadata</li>
+              <li>Model configuration stored in localStorage with explicit consent</li>
+              <li>Status overlays distinguish loading, success and retries</li>
+            </ul>
+          </article>
+          <article class="feature-card">
+            <h3>Creative studios &amp; agencies</h3>
+            <p>Studios can point the UI at internal inference clusters (Ollama or proprietary services) using the Custom provider. HTTP timeouts, schema validation and friendly error mapping safeguard operators.</p>
+            <ul>
+              <li>Custom API URL + model name per environment</li>
+              <li>Composable prompts with aspect-ratio guardrails</li>
+              <li>Download-ready PNG output for downstream editors</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Architecture</span>
+          <h2>Composable client-side orchestration with explicit gateways</h2>
+          <p>The solution optimises for transparency: each module has a single responsibility and can be unit tested without invoking external inference.</p>
+        </div>
+        <div class="architecture-grid">
+          <article class="principle-item">
+            <h3>Capture &amp; preparation</h3>
+            <p><code>StartScreen</code> validates image types, converts to Data URLs and stores them in React state only. No persistence or third-party uploads happen until the user explicitly triggers generation.</p>
+          </article>
+          <article class="principle-item">
+            <h3>Prompt synthesis</h3>
+            <p><code>WardrobeModal</code> assembles structured prompts by combining wardrobe metadata, aspect ratio tokens and fine-tune adjustments. The resulting string is versioned for reproducibility.</p>
+          </article>
+          <article class="principle-item">
+            <h3>Inference gateway</h3>
+            <p><code>geminiService</code> and <code>customModelService</code> translate inputs into the expected provider schemas, enforce MIME parsing and propagate descriptive errors back to the UI layer.</p>
+          </article>
+          <article class="principle-item">
+            <h3>Post-processing &amp; delivery</h3>
+            <p>Responses are normalised into <code>GeneratedImage</code> contracts, surfaced in the gallery grid, and made downloadable with deterministic filenames to support asset catalogues.</p>
+          </article>
+        </div>
+        <div class="architecture-diagram">
+          <div class="diagram-step">
+            <span>01</span>
+            <p>React client collects base image + prompt metadata.</p>
+          </div>
+          <div class="diagram-step">
+            <span>02</span>
+            <p>Service layer validates Data URL, builds multimodal request.</p>
+          </div>
+          <div class="diagram-step">
+            <span>03</span>
+            <p>Gemini 2.5 Flash Image (or custom API) generates portrait.</p>
+          </div>
+          <div class="diagram-step">
+            <span>04</span>
+            <p>Result normalised, base64 reattached, UI updates cards + downloads.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline" class="section muted">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Execution pipeline</span>
+          <h2>From user intent to rendered portrait</h2>
+          <p>The flow below highlights the control points where validation, logging and governance decisions occur.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-step">
+            <h3>1 · Input validation</h3>
+            <p>Client enforces MIME presence, base64 payloads and image type restrictions before persisting anything in memory.</p>
+            <span>Security control: rejects malformed Data URLs immediately.</span>
+          </article>
+          <article class="timeline-step">
+            <h3>2 · Prompt curation</h3>
+            <p>Wardrobe metadata + fine-tune deltas produce a deterministic prompt, ensuring identical requests can be reproduced for audits.</p>
+            <span>Governance: style catalog maintained in <code>wardrobe.ts</code>.</span>
+          </article>
+          <article class="timeline-step">
+            <h3>3 · Model invocation</h3>
+            <p>Gemini gateway signs each request with the user-provided API key; custom mode wraps HTTP POST to arbitrary inference servers.</p>
+            <span>Observability: descriptive errors surface back to users.</span>
+          </article>
+          <article class="timeline-step">
+            <h3>4 · Delivery &amp; export</h3>
+            <p>Base64 image data is rendered, optionally downloaded, and cleared when the user resets the session.</p>
+            <span>Data retention: nothing stored server-side by default.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="operations" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Operations</span>
+          <h2>Build, deployment and maintenance facts</h2>
+          <p>Commands mirror the project README so local testing equals CI behavior.</p>
+        </div>
+        <div class="operations-grid">
+          <article class="tech-category">
+            <h3>Local workflows</h3>
+            <ul class="tech-list">
+              <li><span class="label">Install</span><code>npm install</code></li>
+              <li><span class="label">Dev server</span><code>npm run dev -- --host 0.0.0.0 --port 3000</code></li>
+              <li><span class="label">Quality gate</span><code>npm run ci</code></li>
+            </ul>
+            <p class="tech-note">Node 20+/npm 9+ recommended. Vitest covers service gateways; lint + type-check secure component contracts.</p>
+          </article>
+          <article class="tech-category">
+            <h3>GitHub Pages deployment</h3>
+            <p>The static assets that back this page live under <code>docs/</code>. GitHub Pages is configured to serve from that directory, matching the base path declared in <code>vite.config.ts</code>.</p>
+            <ul class="tech-list">
+              <li>Branch: <code>main</code></li>
+              <li>Base URL: <code>/ai_headshot_generator/</code></li>
+              <li>Artifacts: <code>docs/index.html</code>, <code>landing-styles.css</code>, <code>landing-scripts.js</code></li>
+            </ul>
+          </article>
+          <article class="tech-category">
+            <h3>Runtime configuration</h3>
+            <p>Users bring their own API keys. Configuration is client-side: <code>localStorage</code> stores provider choice, API key, custom URLs and model identifiers.</p>
+            <ul class="tech-list">
+              <li>Gemini key stored only in browser storage</li>
+              <li>Custom backends use HTTPS POST with JSON payload</li>
+              <li>Error helper (<code>lib/utils.ts</code>) standardises user messaging</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section muted">
+      <div class="container contact-grid">
+        <div>
+          <div class="section-header">
+            <span class="section-badge">Contact</span>
+            <h2>Project stewardship</h2>
+            <p>The repository is actively maintained by the author. Collaboration, bug reports and feature proposals are welcome.</p>
+          </div>
+          <ul class="contact-list">
+            <li><span>Maintainer</span><strong>Nuno Salvação · AI Solutions Architect</strong></li>
+            <li><span>Email</span><a href="mailto:nuno.salvacao@gmail.com">nuno.salvacao@gmail.com</a></li>
+            <li><span>GitHub</span><a href="https://github.com/nsalvacao" target="_blank" rel="noopener noreferrer">@nsalvacao</a></li>
+            <li><span>Issues</span><a href="https://github.com/nsalvacao/ai_headshot_generator/issues" target="_blank" rel="noopener noreferrer">Report via GitHub Issues</a></li>
+          </ul>
+        </div>
+        <aside class="contact-panel">
+          <h3>Governance &amp; licensing</h3>
+          <p>The project is released under the MIT License. No personal data is stored server-side; users retain ownership of the assets they generate.</p>
+          <ul>
+            <li>License: <a href="../LICENSE">MIT</a></li>
+            <li>Security: client-side validation + provider safety filters</li>
+            <li>Telemetry: none; analytics disabled by design</li>
+          </ul>
+          <a class="btn btn-primary full" href="https://nsalvacao.github.io/ai_headshot_generator">Open production build</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <p>&copy; <span id="currentYear"></span> AI Headshot Generator · Documentation &amp; system overview.</p>
+      <div class="footer-links">
+        <a href="https://github.com/nsalvacao/ai_headshot_generator" target="_blank" rel="noopener noreferrer">Source code</a>
+        <a href="https://github.com/nsalvacao/ai_headshot_generator/issues" target="_blank" rel="noopener noreferrer">Issue tracker</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing-scripts.js" defer></script>
+  <script>
+    document.addEventListener(DOMContentLoaded, () => {
+      const yearTarget = document.getElementById(currentYear);
+      if (yearTarget) {
+        yearTarget.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+</html>

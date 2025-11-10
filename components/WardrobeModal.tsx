@@ -87,10 +87,10 @@ ${adjustmentPrompt}
     }
 
   return (
-    <div className="flex flex-col gap-6 h-full">
+    <div className="flex flex-col gap-6 h-full text-slate-100">
         {/* Style selection */}
         <div>
-            <h2 className="text-xl font-serif tracking-wider text-gray-800 border-b border-gray-400/50 pb-2 mb-4">1. Choose a Style</h2>
+            <h2 className="text-xl font-serif tracking-wider text-slate-100 border-b border-white/10 pb-3 mb-4">1. Choose a Style</h2>
             <div className="grid grid-cols-2 gap-3">
                 {PREDEFINED_STYLES.map((style) => (
                 <button
@@ -99,8 +99,8 @@ ${adjustmentPrompt}
                     disabled={isLoading}
                     className={`w-full text-center font-semibold py-2 px-3 rounded-md transition-all duration-200 ease-in-out active:scale-95 text-sm disabled:opacity-50 disabled:cursor-not-allowed ${
                         selectedStyle.name === style.name
-                        ? 'bg-gray-800 text-white border border-gray-800'
-                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400'
+                        ? 'bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 text-white border-none shadow-[0_10px_30px_rgba(79,70,229,0.35)]'
+                        : 'bg-slate-900/40 border border-white/10 text-slate-200 hover:border-white/30 hover:bg-slate-900/60'
                     }`}
                     title={style.prompt}
                 >
@@ -111,12 +111,12 @@ ${adjustmentPrompt}
         </div>
         
         {/* Customization */}
-        <div className="flex flex-col gap-4 pt-4 border-t border-gray-400/50">
-            <h2 className="text-xl font-serif tracking-wider text-gray-800">2. Customize</h2>
+        <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
+            <h2 className="text-xl font-serif tracking-wider text-slate-100">2. Customize</h2>
             
             {/* Aspect Ratio */}
             <div>
-                <h3 className="text-base font-semibold text-gray-700 mb-2">Aspect Ratio</h3>
+                <h3 className="text-base font-semibold text-slate-200 mb-2">Aspect Ratio</h3>
                 <div className="flex items-center gap-2">
                     {ASPECT_RATIOS.map((ratio) => (
                         <button
@@ -125,8 +125,8 @@ ${adjustmentPrompt}
                             disabled={isLoading}
                             className={`flex-1 text-center font-semibold py-2 px-3 rounded-md transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed ${
                                 aspectRatio === ratio.value 
-                                ? 'bg-gray-800 text-white border border-gray-800' 
-                                : 'bg-white border border-gray-300 text-gray-600 hover:bg-gray-100'
+                                ? 'bg-slate-800 text-white border border-white/20 shadow-[0_5px_20px_rgba(15,23,42,0.5)]' 
+                                : 'bg-slate-900/30 border border-white/10 text-slate-300 hover:border-white/30 hover:bg-slate-900/50'
                             }`}
                         >
                             {`${ratio.name} (${ratio.value})`}
@@ -140,7 +140,7 @@ ${adjustmentPrompt}
                 <button 
                     onClick={() => setIsFineTunePanelOpen(!isFineTunePanelOpen)}
                     disabled={isLoading}
-                    className="w-full flex items-center justify-between text-left font-semibold py-2 px-3 rounded-md transition-colors text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200"
+                    className="w-full flex items-center justify-between text-left font-semibold py-2 px-3 rounded-md transition-colors text-sm bg-slate-900/40 text-slate-200 hover:bg-slate-900/60 border border-white/10"
                 >
                     <div className="flex items-center">
                         <SlidersIcon className="w-4 h-4 mr-2" />
@@ -169,26 +169,26 @@ ${adjustmentPrompt}
         </div>
 
         {/* Final Prompt */}
-        <div className="flex flex-col gap-4 pt-4 border-t border-gray-400/50">
-            <h2 className="text-xl font-serif tracking-wider text-gray-800">3. Review Your Prompt</h2>
-            <p className="text-sm text-gray-600">This is the final prompt that will be sent to the AI. You can edit it below to refine your request.</p>
+        <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
+            <h2 className="text-xl font-serif tracking-wider text-slate-100">3. Review Your Prompt</h2>
+            <p className="text-sm text-slate-300">This is the final prompt that will be sent to the AI. You can edit it below to refine your request.</p>
             <textarea
                 id="final-prompt"
                 value={finalPrompt}
                 onChange={(e) => setFinalPrompt(e.target.value)}
                 placeholder="Describe the portrait you want to create..."
                 disabled={isLoading}
-                className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-shadow resize-none disabled:opacity-60 disabled:bg-gray-100 text-sm"
+                className="w-full p-3 border border-white/10 rounded-md bg-slate-900/60 text-slate-100 placeholder:text-slate-500 focus:ring-2 focus:ring-indigo-400/70 focus:border-transparent transition-shadow resize-none disabled:opacity-60 disabled:bg-slate-900/30 text-sm"
                 rows={8}
             />
         </div>
 
         {/* Generate Button */}
-        <div className="mt-auto pt-6 border-t border-gray-400/50">
+        <div className="mt-auto pt-6 border-t border-white/10 pb-8">
             <button 
                 onClick={handleGenerateClick}
                 disabled={isLoading || !finalPrompt.trim() || !isGeneratorConfigured}
-                className="w-full flex items-center justify-center text-center bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 ease-in-out hover:bg-gray-700 active:scale-95 text-base disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 text-white font-semibold py-3 px-4 rounded-lg transition-transform duration-200 ease-in-out hover:shadow-[0_20px_45px_rgba(79,70,229,0.35)] active:scale-95 text-base shadow-[0_10px_30px_rgba(79,70,229,0.35)] disabled:opacity-60 disabled:saturate-50 disabled:cursor-not-allowed"
             >
                 {isLoading ? (
                     <>
@@ -203,7 +203,7 @@ ${adjustmentPrompt}
                 )}
             </button>
             {!isGeneratorConfigured && (
-                <p className="text-xs text-center text-red-600 mt-2">
+                <p className="text-xs text-center text-rose-300 mt-2">
                     Please configure your model in the Settings menu to enable generation.
                 </p>
             )}

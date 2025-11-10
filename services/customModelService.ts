@@ -12,7 +12,9 @@
 const dataUrlToBase64 = (dataUrl: string): string => {
     const arr = dataUrl.split(',');
     if (arr.length < 2) throw new Error("Invalid data URL");
-    return arr[1];
+    const base64 = arr[1];
+    if (!base64) throw new Error("Missing base64 data in URL");
+    return base64;
 }
 
 export const generateWithCustomModel = async (

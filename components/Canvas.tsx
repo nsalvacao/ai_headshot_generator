@@ -43,17 +43,17 @@ const ImageCard: React.FC<{
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.8, opacity: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="relative aspect-square w-full rounded-lg shadow-md overflow-hidden group bg-gray-100 border border-gray-200"
+      className="relative aspect-square w-full rounded-2xl shadow-lg overflow-hidden group bg-slate-900/40 border border-white/10"
     >
       {status === 'loading' && (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <Spinner />
-          <p className="text-xs text-gray-500 mt-2 text-center px-1">Generating...</p>
+          <p className="text-xs text-slate-300 mt-2 text-center px-1">Generating...</p>
         </div>
       )}
       {status === 'error' && (
-        <div className="w-full h-full flex items-center justify-center bg-red-50">
-          <p className="text-xs text-red-600 text-center p-2">Generation failed</p>
+        <div className="w-full h-full flex items-center justify-center bg-rose-900/30">
+          <p className="text-xs text-rose-200 text-center p-2">Generation failed</p>
         </div>
       )}
       {url && status !== 'loading' && (
@@ -91,13 +91,13 @@ const ImageCard: React.FC<{
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ baseImage, generatedImages, onStartOver, onOpenSettings }) => {
   return (
-    <div className="w-full h-full flex flex-col p-4 md:p-6">
-      <header className="flex-shrink-0 flex items-center justify-between pb-4 border-b border-gray-200 mb-4">
-        <h1 className="text-2xl md:text-3xl font-serif text-gray-800">Your Gallery</h1>
+    <div className="w-full h-full flex flex-col p-4 md:p-8 text-slate-100">
+      <header className="flex-shrink-0 flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+        <h1 className="text-2xl md:text-3xl font-serif text-slate-100">Your Gallery</h1>
         <div className="flex items-center gap-2">
             <button 
                 onClick={onOpenSettings}
-                className="flex items-center justify-center text-center bg-white border border-gray-300 text-gray-700 font-semibold py-2 px-2 rounded-full transition-all duration-200 ease-in-out hover:bg-gray-100 hover:border-gray-400 active:scale-95 text-sm"
+                className="flex items-center justify-center text-center bg-slate-900/30 border border-white/10 text-slate-100 font-semibold py-2 px-2 rounded-full transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-slate-900/60 active:scale-95 text-sm"
                 title="Settings"
                 aria-label="Open settings"
             >
@@ -105,7 +105,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ baseImage, generatedImages,
             </button>
             <button 
                 onClick={onStartOver}
-                className="flex items-center justify-center text-center bg-white border border-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition-all duration-200 ease-in-out hover:bg-gray-100 hover:border-gray-400 active:scale-95 text-sm"
+                className="flex items-center justify-center text-center bg-slate-900/30 border border-white/10 text-slate-100 font-semibold py-2 px-4 rounded-full transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-slate-900/60 active:scale-95 text-sm"
             >
                 <RotateCcwIcon className="w-4 h-4 mr-2" />
                 Start Over
@@ -120,7 +120,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ baseImage, generatedImages,
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="text-center text-gray-500 mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200"
+              className="text-center text-slate-300 mb-6 p-5 bg-slate-900/30 rounded-2xl border border-white/10"
             >
               <p className="font-serif text-lg">Ready to create?</p>
               <p className="text-sm">Your generated portraits will appear here.</p>

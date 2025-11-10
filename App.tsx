@@ -11,7 +11,6 @@ import StylePanel from './components/WardrobeModal';
 import { generatePortrait } from './services/geminiService';
 import { generateWithCustomModel } from './services/customModelService';
 import { GeneratedImage, ModelConfig } from './types';
-import Footer from './components/Footer';
 import { getFriendlyErrorMessage } from './lib/utils';
 import Spinner from './components/Spinner';
 import SettingsModal from './components/SettingsModal';
@@ -133,12 +132,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 transition-colors duration-300">
       <AnimatePresence mode="wait">
         {!baseImageUrl ? (
           <motion.div
             key="start-screen"
-            className="w-screen min-h-screen flex items-start sm:items-center justify-center bg-gray-50 p-4 pb-20"
+            className="w-full min-h-screen flex items-start sm:items-center justify-center p-4 pb-24"
             variants={viewVariants}
             initial="initial"
             animate="animate"
@@ -150,15 +149,15 @@ const App: React.FC = () => {
         ) : (
           <motion.div
             key="main-app"
-            className="relative flex flex-col h-screen bg-white overflow-hidden"
+            className="relative flex flex-col h-screen bg-slate-900/40 backdrop-blur-2xl border border-white/10 shadow-[0_25px_80px_rgba(2,6,23,0.65)] rounded-[32px] overflow-hidden mx-auto max-w-[1400px] w-full"
             variants={viewVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
-            <main className="flex-grow relative flex flex-col md:flex-row overflow-hidden">
-              <div className="w-full h-full flex-grow flex items-center justify-center bg-gray-50/50 relative">
+            <main className="flex-grow relative flex flex-col md:flex-row overflow-hidden gap-6 p-4 md:p-8">
+              <div className="w-full h-full flex-grow flex items-center justify-center bg-gradient-to-br from-slate-900/20 via-slate-900/60 to-slate-900/20 rounded-3xl border border-white/5 relative">
                 <ImageGallery 
                   baseImage={baseImageUrl}
                   generatedImages={generatedImages}
@@ -167,11 +166,11 @@ const App: React.FC = () => {
                 />
               </div>
 
-              <aside className="md:flex-shrink-0 w-full md:w-1/3 md:max-w-sm bg-white flex flex-col border-t md:border-t-0 md:border-l border-gray-200/60">
-                <div className="p-4 md:p-6 pb-20 overflow-y-auto flex-grow flex flex-col gap-8">
+              <aside className="md:flex-shrink-0 w-full md:w-[420px] bg-slate-950/60 flex flex-col border-t md:border-t-0 md:border-l border-white/10 rounded-3xl md:rounded-3xl">
+                <div className="p-5 md:p-8 pb-24 overflow-y-auto flex-grow flex flex-col gap-8 text-slate-100">
                   {error && (
-                    <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
-                      <p className="font-bold">Error</p>
+                    <div className="bg-rose-900/30 border-l-4 border-rose-500 text-rose-100 p-4 rounded-md" role="alert">
+                      <p className="font-bold text-rose-100">Error</p>
                       <p>{error}</p>
                     </div>
                   )}
@@ -186,20 +185,19 @@ const App: React.FC = () => {
             <AnimatePresence>
               {isGenerating && isMobile && (
                 <motion.div
-                  className="fixed inset-0 bg-white/80 backdrop-blur-md flex flex-col items-center justify-center z-50"
+                  className="fixed inset-0 bg-slate-900/80 backdrop-blur-xl flex flex-col items-center justify-center z-50"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
                   <Spinner />
-                  <p className="text-lg font-serif text-gray-700 mt-4 text-center px-4">Generating...</p>
+                  <p className="text-lg font-semibold text-slate-100 mt-4 text-center px-4">Generating...</p>
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
-      <Footer isOnDressingScreen={!!baseImageUrl} />
       <SettingsModal 
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
